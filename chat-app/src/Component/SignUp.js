@@ -12,6 +12,7 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { render } from '@testing-library/react';
 
 
 function Copyright(props) {
@@ -28,7 +29,7 @@ function Copyright(props) {
 }
 
 const theme = createTheme();
-
+//get the data from the Register form
 export default function SignUp() {
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -36,8 +37,36 @@ export default function SignUp() {
     console.log({
       email: data.get('email'),
       password: data.get('password'),
-    });
+      firstName: data.get('firstName'),
+      lastName: data.get('lastName')
+
+    })
+    addProduct(data);
   };
+  
+/*
+  let databody = {
+    "name": this.state.nameIn,
+    "quote": this.state.quoteIn
+}
+*/
+const addProduct = (data) => {
+
+  fetch('http://localhost:2904/addproduct', {
+      method: 'POST',
+      body: JSON.stringify({
+        email: data.get('email'),
+        name: data.get('name'),
+        lastName: data.get('lastName'),
+        password: data.get('password')
+      }),
+      headers: {
+          'Content-type': 'application/json'
+      }
+
+  })
+      
+}
 
   return (
     <ThemeProvider theme={theme}>

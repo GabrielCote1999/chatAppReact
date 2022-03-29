@@ -3,14 +3,14 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import RegisterForm from './Component/RegisterForm';
+import SignUp from './Component/SignUp';
 import SignInForm from './Component/SignInForm';
 import Chat from './Component/Chat';
 
 ReactDOM.render(
   <React.StrictMode>
     
-    <Chat/>
+    <SignUp/>
   </React.StrictMode>,
   document.getElementById('root')
 );
