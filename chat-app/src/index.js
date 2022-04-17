@@ -6,9 +6,11 @@ import reportWebVitals from './reportWebVitals';
 import SignUp from './Component/SignUp';
 import SignInForm from './Component/SignInForm';
 import Chat from './Component/Chat';
+import Nav from './Component/Nav'
 
 ReactDOM.render(
   <React.StrictMode>
+    <Nav/>
     
     <SignUp/>
   </React.StrictMode>,
