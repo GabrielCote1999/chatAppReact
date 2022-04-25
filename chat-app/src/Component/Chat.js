@@ -4,6 +4,7 @@ import Messages from "./Messages";
 import MessageInput from "./MessageInput";
 
 function Chat() {
+  
   const [socket, setSocket] = useState(null);
 
   /*establish a connection to the given url*/
