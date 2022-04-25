@@ -1,8 +1,13 @@
-
-
 const express = require("express");
 const cors = require("cors");
+const http = require("http");
+
 const app = express();
+const server = http.createServer(app);
+//Socket.io imports
+const { Server } = require("socket.io");
+//HTTP server object
+const io = new Server(server);
 
 /*  cors is a short for cross-origin ressource sharing
     HTTP-header based mechanism that allows a server to 
@@ -12,14 +17,25 @@ const app = express();
 
 app.use(cors());
 
-app.use('/login', (req, res) => {
-    res.send({
-        token:'thisIsAToken'
-    });
-    console.log(token);
+app.use("/login", (req, res) => {
+  res.send({
+    token: "thisIsAToken",
+  });
+  console.log(token);
 });
 
-app.listen(3000, ()=> console.log("The API is running"))
+app.get("/try"),
+  (req, res) => {
+    res.json("hey");
+  };
 
+//listening for a connection event
+app.use("/chat"),
+  (req, res) => {
+      console.log('in /chat')
+    io.on("connection", (socket) => {
+      console.log("a user connected");
+    });
+  };
 
-
+app.listen(3000, () => console.log("The API is running"));
