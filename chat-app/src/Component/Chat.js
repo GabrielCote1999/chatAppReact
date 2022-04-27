@@ -1,32 +1,56 @@
 import React, { useEffect, useState } from "react";
 import io from "socket.io-client";
 import "./Chat.css";
-function Chat() {
-  
-  const [socket, setSocket] = useState(null);
 
-  /*establish a connection to the given url*/
-  useEffect(() => {
-    const newSocket = io(`http://${window.location.hostname}:3001`);
-    setSocket(newSocket);
-    console.log(newSocket);
-    return () => newSocket.close();
-  }, [setSocket]);
+
+function Chat() {
+
+  const [message, setMessage] = useState([]);
+
+  const socket = io('ws://localhost:8080')
+  console.log(socket)
+
+
+
+  
+  socket.on('message', text => {
+    console.log(text)
+    
+
+});
+
+const emmitMessage = (messages) => {
+
+  const text = document.querySelector('input').value;
+ 
+
+  setMessage([...message, text])
+  console.log(messages)
+  
+}
+
+const showMessage = (message) => {
+
+  {message.map(() => (
+    <li>message</li>
+  ))}
+}
 
   return (
     <div className="Chat">
-      <header className="app-header">Chat</header>
-      {/*If someone is connected*/}
-      {socket ? (
-        
-        <div className="chat-container">
-          
-        </div>
-      ) : (
-        <div>Not Connected</div>
-      )}
+
+      <ul {...showMessage}>
+        <li></li>
+
+      </ul>
+
+      <input placeholder="message"/>
+      <button onClick={emmitMessage}>send</button>
+     
     </div>
   );
-}
+  }
+
+
 
 export default Chat;
