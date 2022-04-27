@@ -13,10 +13,12 @@ function App() {
 /*
 the signUp page will only show up if the user is logged in
 */
+/*
   const [token, setToken] = useState();
   if (!token){
     return <SignInForm setToken = {setToken} />
   }
+  */
   return (
 
       <BrowserRouter>

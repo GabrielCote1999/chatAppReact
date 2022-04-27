@@ -1,16 +1,15 @@
 import React, { useEffect, useState } from "react";
 import io from "socket.io-client";
-import Messages from "./Messages";
-import MessageInput from "./newMessages";
-
+import "./Chat.css";
 function Chat() {
   
   const [socket, setSocket] = useState(null);
 
   /*establish a connection to the given url*/
   useEffect(() => {
-    const newSocket = io(`http://${window.location.hostname}:3000`);
+    const newSocket = io(`http://${window.location.hostname}:3001`);
     setSocket(newSocket);
+    console.log(newSocket);
     return () => newSocket.close();
   }, [setSocket]);
 
@@ -21,8 +20,7 @@ function Chat() {
       {socket ? (
         
         <div className="chat-container">
-          <Messages socket={socket} />
-          <MessageInput socket={socket} />
+          
         </div>
       ) : (
         <div>Not Connected</div>

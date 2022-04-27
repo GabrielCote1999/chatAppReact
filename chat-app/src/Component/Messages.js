@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-
+import './Messages.css';
 
 function Messages({ socket }) {
   const [messages, setMessages] = useState({});
@@ -10,6 +10,7 @@ function Messages({ socket }) {
       setMessages((prevMessages) => {
         const newMessages = {...prevMessages};
         newMessages[message.id] = message;
+        console.log("this is the new message", message)
         return newMessages;
       });
     };
@@ -18,6 +19,7 @@ function Messages({ socket }) {
       setMessages((prevMessages) => {
         const newMessages = {...prevMessages};
         delete newMessages[messageID];
+        console.log(newMessages)
         return newMessages;
       });
     };
