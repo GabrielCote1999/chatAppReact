@@ -8,45 +8,33 @@ function Chat() {
   const [message, setMessage] = useState([]);
 
   const socket = io('ws://localhost:8080')
-  console.log(socket)
 
-
-
-  
+  console.log(socket)  
   socket.on('message', text => {
-    console.log(text)
-    
+  setMessage([...message, text]);
+ 
 
 });
 
-const emmitMessage = (messages) => {
+const listMessage = message.map((message) =>
+<li>{message}</li>
+)
+
+const emmitMessage = () => {
 
   const text = document.querySelector('input').value;
- 
-
-  setMessage([...message, text])
-  console.log(messages)
+  socket.emit('message', text)  
   
-}
-
-const showMessage = (message) => {
-
-  {message.map(() => (
-    <li>message</li>
-  ))}
 }
 
   return (
     <div className="Chat">
-
-      <ul {...showMessage}>
-        <li></li>
-
-      </ul>
+  
+      <ul>{listMessage}</ul>
 
       <input placeholder="message"/>
       <button onClick={emmitMessage}>send</button>
-     
+      
     </div>
   );
   }
