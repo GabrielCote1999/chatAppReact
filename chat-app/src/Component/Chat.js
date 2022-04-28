@@ -24,13 +24,14 @@ useEffect(
 
 const push = () =>{
   const text = document.querySelector('input').value;
-  socket.emit('message', text[0])
-  console.log(message)
+  socket.emit('message', text)
+  console.log("this is text",text)
 }
 
 
-const listMessage = Object.keys(message).map((key) =>
-  <li key ={key}>{message[key]}</li>
+
+const listMessage = (Array.from(message)).map((message) =>
+  <li >{message}</li>
 );
 
 
