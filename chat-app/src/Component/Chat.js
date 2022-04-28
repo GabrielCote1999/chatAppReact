@@ -5,27 +5,34 @@ import "./Chat.css";
 
 function Chat() {
 
-  const [message, setMessage] = useState([]);
+const [message, setMessage] = useState([]);
 
-  const socket = io('ws://localhost:8080')
+const socket = io('ws://localhost:8080');
 
-  console.log(socket)  
-  socket.on('message', text => {
-  setMessage([...message, text]);
- 
-
-});
-
-const listMessage = message.map((message) =>
-<li>{message}</li>
+useEffect(
+  () => {
+    
+    socket.connect();
+    socket.on("message", setMessage);
+     
+    return () => {
+      socket.disconnect();
+    }
+  },
+  []
 )
 
-const emmitMessage = () => {
-
+const push = () =>{
   const text = document.querySelector('input').value;
-  socket.emit('message', text)  
-  
+  socket.emit('message', text[0])
+  console.log(message)
 }
+
+
+const listMessage = Object.keys(message).map((key) =>
+  <li key ={key}>{message[key]}</li>
+);
+
 
   return (
     <div className="Chat">
@@ -33,7 +40,8 @@ const emmitMessage = () => {
       <ul>{listMessage}</ul>
 
       <input placeholder="message"/>
-      <button onClick={emmitMessage}>send</button>
+      <button onClick={push}>click</button>
+      
       
     </div>
   );
