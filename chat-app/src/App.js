@@ -9,6 +9,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from './Component/Home';
 import React, {useState} from 'react';
 
+
 function App() {
 /*
 the signUp page will only show up if the user is logged in
@@ -28,6 +29,7 @@ the signUp page will only show up if the user is logged in
         <Route path = '/login' element = {<SignInForm/>} />
         <Route path = '/signup' element = {<SignUp/>} />
         <Route path ='/chat' element = {<Chat/>} />
+        
       </Routes>
       </BrowserRouter>
    

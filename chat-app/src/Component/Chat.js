@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import io from "socket.io-client";
 import "./Chat.css";
+import SideBar from "./SideBar";
 
 
 function Chat() {
@@ -13,7 +14,8 @@ useEffect(
   () => {
     
     socket.connect();
-    socket.on("message", setMessage);
+    socket.on("message", setMessage); 
+    
      
     return () => {
       socket.disconnect();
@@ -26,17 +28,22 @@ const push = () =>{
   const text = document.querySelector('input').value;
   socket.emit('message', text)
   console.log("this is text",text)
+
+  console.log(typeof text);
 }
 
+console.log("this is type", typeof Array.from(message));
 
-
-const listMessage = (Array.from(message)).map((message) =>
-  <li >{message}</li>
+const listMessage = (Array.from(message)).map((messages) =>
+  <li >{messages}</li>
 );
 
 
   return (
     <div className="Chat">
+
+      <SideBar/>
+
   
       <ul>{listMessage}</ul>
 
