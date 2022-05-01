@@ -8,7 +8,7 @@ function Messages({ socket }) {
     const messageListener = (message) => {
       
       setMessages((prevMessages) => {
-        console.log("this is socket",socket)
+        
         const newMessages = {...prevMessages};
         newMessages[message.id] = message;
         return newMessages;

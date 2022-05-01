@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import io from "socket.io-client";
+import { io } from "socket.io-client";
 import "./Chat.css";
 import SideBar from "./SideBar";
 import Messages from "./Messages"
@@ -10,16 +10,15 @@ function Chat() {
   const [socket, setSocket] = useState(null);
 
   useEffect(() => {
-    const newSocket = io(`http://localhost:3000`);  
+ 
+
+    const newSocket = io(`http://localhost:3000`);
+
     setSocket(newSocket);
-    console.log(socket)
-    
-   
+
+    console.log(newSocket);
     return () => newSocket.close();
   }, [setSocket]);
-
-
-
 
   
   return (

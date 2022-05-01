@@ -24,7 +24,7 @@ class Connection {
   
   sendMessage(message) {
     this.io.sockets.emit('message', message);
-    console.log("message backend", message)
+    
   }
   
   getMessages() {
@@ -53,7 +53,7 @@ class Connection {
 function chatBackend(io) {
   io.on('connection', (socket) => {
     new Connection(io, socket);   
-    console.log(Connection)
+    
   });
 };
 

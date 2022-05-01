@@ -3,11 +3,17 @@ This is the server.js file where the routing for the app will be made
 Author: Gabriel Cote
 Version: 1.0
 */
+
+var express = require("express");
+var app = express();
+var cors = require('cors');
+const path = require('path');
+app.use(cors()); // add this line
+app.use(express.json());
+app.use(express.static(path.join(__dirname, 'public')));
 const chatBackend = require('./chatBackend');
 var socketio = require('socket.io');
 var http = require("http");
-var express = require("express");
-var app = express();
 
 var port = normalizePort(process.env.PORT || '3000');
 app.set('port', port);
@@ -25,13 +31,6 @@ var io = socketio(server,{
 });
 chatBackend(io);
 console.log(chatBackend);
-var cors = require('cors');
-
-
-
-
-app.use(cors()); // add this line
-
 
 server.listen(port);
 
@@ -46,13 +45,7 @@ app.use("/login", (req, res) => {
 });
 */
 //http.listen(8080, () => console.log("listening on http://localhost:8080"));
-function onListening() {
-  var addr = server.address();
-  var bind = typeof addr === 'string'
-    ? 'pipe ' + addr
-    : 'port ' + addr.port;
 
-}
 
 function normalizePort(val) {
   var port = parseInt(val, 10);
@@ -68,4 +61,13 @@ function normalizePort(val) {
   }
 
   return false;
+}
+
+function onListening() {
+  var addr = server.address();
+  var bind = typeof addr === 'string'
+    ? 'pipe ' + addr
+    : 'port ' + addr.port;
+    
+
 }
