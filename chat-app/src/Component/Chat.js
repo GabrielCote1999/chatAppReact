@@ -23,9 +23,9 @@ function Chat() {
   
   return (
     <div className="Chat">
-      {/*
+     
       <SideBar className="side" />
-  */}
+  
       <section className="chat">
         <h1>This is the chatRoom</h1>
 
