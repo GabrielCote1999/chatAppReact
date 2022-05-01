@@ -6,6 +6,7 @@ const NewMessage = ({socket}) => {
   const submitForm = (e) => {
     e.preventDefault();
     socket.emit('message', value);
+    console.log(socket.emit('message', value))
     setValue('');
   };
 

@@ -5,12 +5,12 @@ function Messages({ socket }) {
   const [messages, setMessages] = useState({});
 
   useEffect(() => {
-
     const messageListener = (message) => {
+      
       setMessages((prevMessages) => {
+        console.log("this is socket",socket)
         const newMessages = {...prevMessages};
         newMessages[message.id] = message;
-        console.log("this is the new message", message)
         return newMessages;
       });
     };
@@ -19,7 +19,6 @@ function Messages({ socket }) {
       setMessages((prevMessages) => {
         const newMessages = {...prevMessages};
         delete newMessages[messageID];
-        console.log(newMessages)
         return newMessages;
       });
     };
@@ -30,6 +29,7 @@ function Messages({ socket }) {
 
     return () => {
       socket.off('message', messageListener);
+      console.log("this is socket",socket)
       socket.off('deleteMessage', deleteMessageListener);
     };
   }, [socket]);

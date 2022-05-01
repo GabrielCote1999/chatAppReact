@@ -2,46 +2,44 @@ import React, { useEffect, useState } from "react";
 import io from "socket.io-client";
 import "./Chat.css";
 import SideBar from "./SideBar";
+import Messages from "./Messages"
+import MessageInput from './MessageInput';
 
 function Chat() {
-  const [message, setMessage] = useState([]);
-
-  const socket = io("ws://localhost:8080");
+  
+  const [socket, setSocket] = useState(null);
 
   useEffect(() => {
-    socket.connect();
-    socket.on("message", setMessage);
+    const newSocket = io(`http://localhost:3000`);  
+    setSocket(newSocket);
+    console.log(socket)
+    
+   
+    return () => newSocket.close();
+  }, [setSocket]);
 
-    return () => {
-      socket.disconnect();
-    };
-  }, []);
 
-  const push = () => {
-    const text = document.querySelector("input").value;
-    socket.emit("message", text);
-    console.log("this is text", text);
 
-    console.log(typeof text);
-  };
 
-  console.log("this is type", typeof Array.from(message));
-
-  const listMessage = Array.from(message).map((messages) => (
-    <li>{messages}</li>
-  ));
-
+  
   return (
     <div className="Chat">
-      <SideBar className = "side" />
-
+      {/*
+      <SideBar className="side" />
+  */}
       <section className="chat">
         <h1>This is the chatRoom</h1>
 
-        <ul>{listMessage}</ul>
+        { socket ? (
+        <div className="chat-container">
+          <Messages socket={socket} />
+          <MessageInput socket={socket} />
+          
+        </div>
+      ) : (
+        <div>Not Connected</div>
+      )}
 
-        <input placeholder="message" />
-        <button onClick={push}>click</button>
       </section>
     </div>
   );

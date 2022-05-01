@@ -20,6 +20,11 @@ the signUp page will only show up if the user is logged in
     return <SignInForm setToken = {setToken} />
   }
   */
+
+
+  //Socket
+  
+
   return (
 
       <BrowserRouter>
