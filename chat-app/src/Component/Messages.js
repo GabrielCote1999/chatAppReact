@@ -41,7 +41,7 @@ function Messages({ socket }) {
         .map((message) => (
           <div
             key={message.id}
-            className="message-container"
+            className="message-user-container"
             title={`Sent at ${new Date(message.time).toLocaleTimeString()}`}
           >
             <span className="user">{message.user.name}:</span>

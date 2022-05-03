@@ -8,6 +8,17 @@
     flex-direction: row;
     padding: 0.5rem;
     border-bottom: 1px solid #eeeeee;
+ 
+  }
+  .message-user-container{
+    display: flex;
+    flex-direction: row;
+    padding: 0.5rem;
+    border: 3px solid #8870ff;
+   
+    color: white;
+    border-radius: 5px;
+
   }
   
   .user, .date {
