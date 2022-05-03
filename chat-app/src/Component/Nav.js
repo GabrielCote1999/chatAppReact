@@ -8,8 +8,8 @@ import IconButton from "@mui/material/IconButton";
 import { Link } from "react-router-dom";
 import "./Nav.css";
 
-const Nav = (props) => {
-  const token = props.token;
+const Nav = (setToken) => {
+  const token = setToken
 
   return (
     <div className="nav">
@@ -36,8 +36,10 @@ const Nav = (props) => {
               Register
             </Button>
             ): (
+              
               <></>
             )}
+            {console.log("this is the toekn",token)}
 
             {!token ? (
               <Button component={Link} to="/" color="inherit">

@@ -73,7 +73,10 @@ function onListening() {
 app.use('/login', (req, res) => {
   res.send({
       token:'thisIsAToken'
+      
   });
-  console.log(token);
+  
 });
+
+
 

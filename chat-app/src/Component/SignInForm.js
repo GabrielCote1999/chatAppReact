@@ -41,7 +41,7 @@ async function loginUser(credentials) {
     
     body :JSON.stringify(credentials)
   })
-  .then(data => data.json())
+  .then(credentials => credentials.json())
 }
 
 const theme = createTheme();
@@ -58,6 +58,7 @@ export default function SignIn( {setToken}) {
       password
     });
    setToken(token);
+   console.log(token)
   };
 
   return (
