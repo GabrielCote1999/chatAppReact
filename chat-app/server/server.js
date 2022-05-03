@@ -68,6 +68,12 @@ function onListening() {
   var bind = typeof addr === 'string'
     ? 'pipe ' + addr
     : 'port ' + addr.port;
-    
-
 }
+
+app.use('/login', (req, res) => {
+  res.send({
+      token:'thisIsAToken'
+  });
+  console.log(token);
+});
+

@@ -14,12 +14,13 @@ function App() {
 /*
 the signUp page will only show up if the user is logged in
 */
-/*
+
   const [token, setToken] = useState();
   if (!token){
     return <SignInForm setToken = {setToken} />
   }
-  */
+
+  
 
 
   //Socket
@@ -28,10 +29,10 @@ the signUp page will only show up if the user is logged in
   return (
 
       <BrowserRouter>
-      <Nav />
+      <Nav token = {setToken}  />
       <Routes>
        <Route path = '/' element = {<Home/>} />
-        <Route path = '/login' element = {<SignInForm/>} />
+        <Route path = '/login' element = {<SignInForm setToken = {setToken}/>} />
         <Route path = '/signup' element = {<SignUp/>} />
         <Route path ='/chat' element = {<Chat/>} />
         

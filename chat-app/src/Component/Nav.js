@@ -8,7 +8,11 @@ import IconButton from "@mui/material/IconButton";
 import { Link } from "react-router-dom";
 import "./Nav.css"
 
-const Nav = () => {
+const Nav = (props) => {
+
+  const token = props.token;
+
+ 
   return (
     <div className="nav">
     <Box 
@@ -39,14 +43,23 @@ const Nav = () => {
             Register
           </Button>
 
-          <Button component = {Link} to = "/login" color="inherit">
-              Login
-              </Button>
+         {!token? <Button component = {Link} to = "/login" color="inherit">Login</Button>: <></>}
+
+         
+       
+           
+          
+          
+             
           <Button component ={Link} to ="/chat" color="inherit">Chat</Button>
         </Toolbar>
       </AppBar>
     </Box>
     </div>
+  
   );
-};
+  
+}
+
+
 export default Nav;
