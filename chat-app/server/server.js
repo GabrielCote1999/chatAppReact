@@ -71,11 +71,17 @@ function onListening() {
 }
 
 app.use('/login', (req, res) => {
+  console.log("this is res", req.body.userName)
   res.send({
-      token:'thisIsAToken'
+      token:'thisIsAToken',
+      id:'1'
       
   });
   
+});
+
+app.use('/logout', (req, res) =>{
+ console.log(req.body)
 });
 
 

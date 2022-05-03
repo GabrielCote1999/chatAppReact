@@ -7,9 +7,35 @@ import Button from "@mui/material/Button";
 import IconButton from "@mui/material/IconButton";
 import { Link } from "react-router-dom";
 import "./Nav.css";
+import { Navigate } from 'react-router'
 
 const Nav = (setToken) => {
+
   const token = setToken
+
+  const handleLogout = (token) => {
+    if(token){
+
+
+      console.log(token)
+    return fetch('http://localhost:3000/logout', {
+    method: 'POST', 
+    headers: {
+      'Content-Type' : 'application/json'
+    },
+    
+    body :JSON.stringify(token)
+    }).then(<Navigate to="/signup"/>).then("user logged out")  
+  }else{
+    console.log("the user had no token ")
+  }
+}
+
+  
+
+
+
+
 
   return (
     <div className="nav">
@@ -46,7 +72,7 @@ const Nav = (setToken) => {
                 Login
               </Button>
             ) : (
-              <Button component={Link} to="/" color="inherit">
+              <Button onClick={handleLogout(token)} component={Link} to="/chat" color="inherit">
                 Logout
               </Button>
             )}
