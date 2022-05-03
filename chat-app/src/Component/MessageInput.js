@@ -25,7 +25,12 @@ const NewMessage = ({ socket }) => {
   return (
     <form onSubmit={submitForm}>
 
-  
+  <Box
+  marginTop={3}
+  marginBottom={3}
+  marginRight={1}
+  marginLeft={1}
+  >
       <TextField
         margin="auto"
         fullWidth
@@ -40,6 +45,7 @@ const NewMessage = ({ socket }) => {
           setValue(e.currentTarget.value);
         }}
       />
+      </Box>
       
     </form>
     

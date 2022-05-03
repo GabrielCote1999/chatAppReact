@@ -1,6 +1,7 @@
 .message-list {
     max-width: 500px;
     width: 100%;
+    margin-bottom: 10px;
   }
   
   .message-container {
@@ -16,8 +17,11 @@
     padding: 0.5rem;
     border: 3px solid #8870ff;
    
-    color: white;
+    color:#8870ff;
     border-radius: 5px;
+    margin-top: 10px;
+    margin-right: 10px;
+    margin-left: 5px;
 
   }
   
