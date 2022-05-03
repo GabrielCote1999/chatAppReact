@@ -17,7 +17,12 @@
 
 }
 
+.title{
+text-align: center;
+}
+
 .background{
+  font-family: "Arial";
   overflow:auto;
   width: 98vw;
   height: 100vh;

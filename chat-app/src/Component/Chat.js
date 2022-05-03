@@ -29,14 +29,7 @@ function Chat() {
           fontSize={24}
           color="white"
          marginTop={10}>
-        <Typography 
-         fontFamily="Nunito"
-        variant="h3" 
-        f
-        align="center"
-        color="white">
-          This is the chatroom
-        </Typography>
+        <h1 className="title">This is the chatRoom</h1>
         </Box>
         <Box
           marginTop={10}

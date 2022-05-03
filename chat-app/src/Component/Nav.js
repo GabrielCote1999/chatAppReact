@@ -10,7 +10,8 @@ import "./Nav.css"
 
 const Nav = () => {
   return (
-    <Box className="nav" 
+    <div className="nav">
+    <Box 
     sx={{ flexGrow: 1, zIndex:-2 }}
     >
       <AppBar position="static"
@@ -45,6 +46,7 @@ const Nav = () => {
         </Toolbar>
       </AppBar>
     </Box>
+    </div>
   );
 };
 export default Nav;
