@@ -43,7 +43,7 @@ const Nav = (props) => {
             Register
           </Button>
 
-         {!token? <Button component = {Link} to = "/login" color="inherit">Login</Button>: <></>}
+         {!token? <Button component = {Link} to = "/login" color="inherit">Login</Button>: <Button component = {Link} to = "/login" color="inherit">Logout</Button>}
 
          
        
