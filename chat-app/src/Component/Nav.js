@@ -10,7 +10,9 @@ import "./Nav.css"
 
 const Nav = () => {
   return (
-    <Box className="nav" sx={{ flexGrow: 1, zIndex:-2 }}>
+    <Box className="nav" 
+    sx={{ flexGrow: 1, zIndex:-2 }}
+    >
       <AppBar position="static"
       >
         <Toolbar >
