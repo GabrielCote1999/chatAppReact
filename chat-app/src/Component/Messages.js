@@ -1,36 +1,33 @@
-import React, { useEffect, useState } from 'react';
-import './Messages.css';
+import React, { useEffect, useState } from "react";
+import "./Messages.css";
 
 function Messages({ socket }) {
   const [messages, setMessages] = useState({});
 
   useEffect(() => {
     const messageListener = (message) => {
-      
       setMessages((prevMessages) => {
-        
-        const newMessages = {...prevMessages};
+        const newMessages = { ...prevMessages };
         newMessages[message.id] = message;
         return newMessages;
       });
     };
-  
+
     const deleteMessageListener = (messageID) => {
       setMessages((prevMessages) => {
-        const newMessages = {...prevMessages};
+        const newMessages = { ...prevMessages };
         delete newMessages[messageID];
         return newMessages;
       });
     };
-  
-    socket.on('message', messageListener);
-    socket.on('deleteMessage', deleteMessageListener);
-    socket.emit('getMessages');
+
+    socket.on("message", messageListener);
+    socket.on("deleteMessage", deleteMessageListener);
+    socket.emit("getMessages");
 
     return () => {
-      socket.off('message', messageListener);
-      console.log("this is socket",socket)
-      socket.off('deleteMessage', deleteMessageListener);
+      socket.off("message", messageListener);
+      socket.off("deleteMessage", deleteMessageListener);
     };
   }, [socket]);
 
@@ -46,10 +43,11 @@ function Messages({ socket }) {
           >
             <span className="user">{message.user.name}:</span>
             <span className="message">{message.value}</span>
-            <span className="date">{new Date(message.time).toLocaleTimeString()}</span>
+            <span className="date">
+              {new Date(message.time).toLocaleTimeString()}
+            </span>
           </div>
-        ))
-      }
+        ))}
     </div>
   );
 }

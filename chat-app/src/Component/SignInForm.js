@@ -1,29 +1,31 @@
-import React, {useState} from 'react';
-import Avatar from '@mui/material/Avatar';
-import Button from '@mui/material/Button';
-import CssBaseline from '@mui/material/CssBaseline';
-import TextField from '@mui/material/TextField';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
-import Link from '@mui/material/Link';
-import Grid from '@mui/material/Grid';
-import Box from '@mui/material/Box';
-import Typography from '@mui/material/Typography';
-import Container from '@mui/material/Container';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
-
-import PropTypes from 'prop-types';
-
+import React, { useState } from "react";
+import Avatar from "@mui/material/Avatar";
+import Button from "@mui/material/Button";
+import CssBaseline from "@mui/material/CssBaseline";
+import TextField from "@mui/material/TextField";
+import Link from "@mui/material/Link";
+import Grid from "@mui/material/Grid";
+import Box from "@mui/material/Box";
+import Typography from "@mui/material/Typography";
+import Container from "@mui/material/Container";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { useNavigate } from "react-router-dom";
+import PropTypes from "prop-types";
 
 function Copyright(props) {
   return (
-    <Typography variant="body2" color="text.secondary" align="center" {...props}>
-      {'Copyright © '}
+    <Typography
+      variant="body2"
+      color="text.secondary"
+      align="center"
+      {...props}
+    >
+      {"Copyright © "}
       <Link color="inherit" href="https://mui.com/">
         Your Website
-      </Link>{' '}
+      </Link>{" "}
       {new Date().getFullYear()}
-      {'.'}
+      {"."}
     </Typography>
   );
 }
@@ -31,34 +33,48 @@ function Copyright(props) {
 /*
 takes credentials as an argument,
 then call the fetch method using a post request
-*/ 
+*/
+
 async function loginUser(credentials) {
-  return fetch('http://localhost:3000/login', {
-    method: 'POST',
+  return fetch("http://localhost:3000/login", {
+    method: "POST",
     headers: {
-      'Content-Type' : 'application/json'
+      "Content-Type": "application/json",
     },
-    
-    body :JSON.stringify(credentials)
-  })
-  .then(credentials => credentials.json())
+    body: JSON.stringify(credentials),
+  }).then((credentials) => credentials.json());
+}
+
+async function sendToken(token) {
+  return fetch("http://localhost:3000/sendToken", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(token),
+  }).then((token) => token.json());
 }
 
 const theme = createTheme();
 
-export default function SignIn( {setToken}) {
-
+export default function SignIn({ setToken }) {
+  const navigate = useNavigate();
   const [userName, setUsername] = useState();
   const [password, setPassword] = useState();
 
-  const handleSubmit = async e => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    const token = await loginUser ({
+    const token = await loginUser({
       userName,
-      password
+      password,
     });
-   setToken(token);
-   console.log(token)
+    setToken(token);
+    sendToken(token);
+    navigate("/");
+  };
+
+  const navRegister = () => {
+    navigate("/signup");
   };
 
   return (
@@ -68,18 +84,21 @@ export default function SignIn( {setToken}) {
         <Box
           sx={{
             marginTop: 8,
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
           }}
         >
-          <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
-       
-          </Avatar>
+          <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}></Avatar>
           <Typography component="h1" variant="h5">
             Sign in
           </Typography>
-          <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
+          <Box
+            component="form"
+            onSubmit={handleSubmit}
+            noValidate
+            sx={{ mt: 1 }}
+          >
             <TextField
               margin="normal"
               required
@@ -89,7 +108,7 @@ export default function SignIn( {setToken}) {
               name="email"
               autoComplete="email"
               autoFocus
-              onChange={e => setUsername(e.target.value)}
+              onChange={(e) => setUsername(e.target.value)}
             />
             <TextField
               margin="normal"
@@ -100,12 +119,9 @@ export default function SignIn( {setToken}) {
               type="password"
               id="password"
               autoComplete="current-password"
-              onChange={e => setPassword(e.target.value)}
+              onChange={(e) => setPassword(e.target.value)}
             />
-            <FormControlLabel
-              control={<Checkbox value="remember" color="primary" />}
-              label="Remember me"
-            />
+
             <Button
               type="submit"
               fullWidth
@@ -116,13 +132,11 @@ export default function SignIn( {setToken}) {
             </Button>
             <Grid container>
               <Grid item xs>
-                <Link href="#" variant="body2">
-                  Forgot password?
+                <Link onClick={navRegister} variant="body2">
+                  {"You don't have an account ?"}
                 </Link>
               </Grid>
-              <Grid item>
-               
-              </Grid>
+              <Grid item></Grid>
             </Grid>
           </Box>
         </Box>
@@ -133,5 +147,5 @@ export default function SignIn( {setToken}) {
 }
 
 SignIn.propTypes = {
-  setToken: PropTypes.func.isRequired
-}
+  setToken: PropTypes.func.isRequired,
+};

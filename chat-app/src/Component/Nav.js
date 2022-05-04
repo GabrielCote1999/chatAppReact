@@ -7,35 +7,15 @@ import Button from "@mui/material/Button";
 import IconButton from "@mui/material/IconButton";
 import { Link } from "react-router-dom";
 import "./Nav.css";
-import { Navigate } from 'react-router'
 
 const Nav = (setToken) => {
-
-  const token = setToken
+  const token = setToken;
 
   const handleLogout = (token) => {
-    if(token){
-
-
-      console.log(token)
-    return fetch('http://localhost:3000/logout', {
-    method: 'POST', 
-    headers: {
-      'Content-Type' : 'application/json'
-    },
-    
-    body :JSON.stringify(token)
-    }).then(<Navigate to="/signup"/>).then("user logged out")  
-  }else{
-    console.log("the user had no token ")
-  }
-}
-
-  
-
-
-
-
+    if (token) {
+      console.log("dans console.log", token);
+    }
+  };
 
   return (
     <div className="nav">
@@ -57,22 +37,26 @@ const Nav = (setToken) => {
             <Button component={Link} to="/" color="inherit">
               Home
             </Button>
-            {!token ? (
-            <Button component={Link} to="/signup" color="inherit">
-              Register
-            </Button>
-            ): (
-              
+            {token ? (
+              <Button component={Link} to="/signup" color="inherit">
+                Register
+              </Button>
+            ) : (
               <></>
             )}
-            {console.log("this is the toekn",token)}
+            {console.log("this is the toekn", token)}
 
-            {!token ? (
-              <Button component={Link} to="/" color="inherit">
+            {token ? (
+              <Button component={Link} to="/login" color="inherit">
                 Login
               </Button>
             ) : (
-              <Button onClick={handleLogout(token)} component={Link} to="/chat" color="inherit">
+              <Button
+                onClick={handleLogout(token)}
+                component={Link}
+                to="/login"
+                color="inherit"
+              >
                 Logout
               </Button>
             )}
