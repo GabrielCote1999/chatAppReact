@@ -14,6 +14,22 @@ app.use(express.static(path.join(__dirname, "public")));
 const chatBackend = require("./chatBackend");
 var socketio = require("socket.io");
 var http = require("http");
+//Database object
+const db = require("./database");
+
+db.mongoose
+  .connect(`mongodb://localhost:27017/cluster0`, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
+  .then(() => {
+    console.log("Successfully connect to MongoDB.");
+    initial();
+  })
+  .catch((err) => {
+    console.error("Connection error", err);
+    process.exit();
+  });
 
 var port = normalizePort(process.env.PORT || "3000");
 app.set("port", port);
