@@ -18,13 +18,15 @@ var http = require("http");
 const db = require("./database");
 
 db.mongoose
-  .connect(`mongodb://localhost:27017/cluster0`, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  })
+  .connect(
+    "mongodb+srv://gabrielcote1999:Monnewmdp1234!@cluster0.laoyw.mongodb.net/myFirstDatabase?retryWrites=true&w=majority",
+    {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    }
+  )
   .then(() => {
     console.log("Successfully connect to MongoDB.");
-    initial();
   })
   .catch((err) => {
     console.error("Connection error", err);
