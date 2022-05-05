@@ -38,19 +38,15 @@ const Nav = (setToken) => {
               Home
             </Button>
             {token ? (
+              <></>
+            ) : (
               <Button component={Link} to="/signup" color="inherit">
                 Register
               </Button>
-            ) : (
-              <></>
             )}
             {console.log("this is the toekn", token)}
 
             {token ? (
-              <Button component={Link} to="/login" color="inherit">
-                Login
-              </Button>
-            ) : (
               <Button
                 onClick={handleLogout(token)}
                 component={Link}
@@ -58,6 +54,10 @@ const Nav = (setToken) => {
                 color="inherit"
               >
                 Logout
+              </Button>
+            ) : (
+              <Button component={Link} to="/login" color="inherit">
+                Login
               </Button>
             )}
 
