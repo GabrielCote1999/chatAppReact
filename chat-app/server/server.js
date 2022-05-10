@@ -17,6 +17,7 @@ var http = require("http");
 //Database object
 const db = require("./database");
 
+
 db.mongoose
   .connect(
     "mongodb+srv://gabrielcote1999:Monnewmdp1234!@cluster0.laoyw.mongodb.net/myFirstDatabase?retryWrites=true&w=majority",
@@ -96,7 +97,9 @@ app.use("/logout", (req, res) => {
   console.log(req.body);
 });
 
+
 app.use("/sendToken", (req, res) => {
   tokens.push(req.body);
   console.log("this is the tokens", tokens);
 });
+require('./routes/auth.routes')(app);
