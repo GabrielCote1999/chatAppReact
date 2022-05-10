@@ -5,11 +5,6 @@ const User = mongoose.model(
     username: String,
     email: String,
     password: String,
-    roles: [
-      {
-        type: mongoose.Schema.Types.ObjectId,
-      },
-    ],
   })
 );
 module.exports = User;
