@@ -14,8 +14,9 @@ app.use(express.static(path.join(__dirname, "public")));
 const chatBackend = require("./chatBackend");
 var socketio = require("socket.io");
 var http = require("http");
-//Database object
+//Database object 
 const db = require("./database");
+require('./routes/auth.routes')(app);
 
 
 db.mongoose
@@ -28,11 +29,14 @@ db.mongoose
   )
   .then(() => {
     console.log("Successfully connect to MongoDB.");
+  
   })
   .catch((err) => {
     console.error("Connection error", err);
     process.exit();
   });
+
+  
 
 var port = normalizePort(process.env.PORT || "3000");
 app.set("port", port);
@@ -102,4 +106,3 @@ app.use("/sendToken", (req, res) => {
   tokens.push(req.body);
   console.log("this is the tokens", tokens);
 });
-require('./routes/auth.routes')(app);

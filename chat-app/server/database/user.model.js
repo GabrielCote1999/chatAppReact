@@ -5,6 +5,9 @@ const User = mongoose.model(
     username: String,
     email: String,
     password: String,
+    
   })
 );
+
+console.log(User)
 module.exports = User;

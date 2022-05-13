@@ -34,8 +34,8 @@ export default function SignUp() {
     console.log({
       email: data.get('email'),
       password: data.get('password'),
-      firstName: data.get('firstName'),
-      lastName: data.get('lastName')
+      username: data.get('firstName'),
+
 
     })
     addProduct(data);
@@ -49,19 +49,18 @@ export default function SignUp() {
 */
 const addProduct = (data) => {
 
-  fetch('http://localhost:2904/addproduct', {
+  fetch('http://localhost:3000/api/auth/signup', {
       method: 'POST',
       body: JSON.stringify({
-        email: data.get('email'),
-        name: data.get('name'),
-        lastName: data.get('lastName'),
+        
+        username: data.get('email'),
+        email: data.get('name'),
         password: data.get('password')
       }),
       headers: {
           'Content-type': 'application/json'
       }
-
-  })
+  }).then(console.log("send"))
       
 }
 
