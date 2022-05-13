@@ -3,7 +3,7 @@ This is the server.js file where the routing for the app will be made
 Author: Gabriel Cote
 Version: 1.0
 */
-
+const mongoose = require("mongoose");
 var express = require("express");
 var app = express();
 var cors = require("cors");
@@ -14,12 +14,14 @@ app.use(express.static(path.join(__dirname, "public")));
 const chatBackend = require("./chatBackend");
 var socketio = require("socket.io");
 var http = require("http");
+const User = require("./database/user.model");
+const { Password } = require("@mui/icons-material");
 //Database object 
-const db = require("./database");
+//const db = require("./database");
 require('./routes/auth.routes')(app);
 
 
-db.mongoose
+mongoose
   .connect(
     "mongodb+srv://gabrielcote1999:Monnewmdp1234!@cluster0.laoyw.mongodb.net/myFirstDatabase?retryWrites=true&w=majority",
     {
@@ -96,6 +98,15 @@ app.use("/login", (req, res) => {
     id: "1",
   });
 });
+
+app.use("/api/register", (req, res) =>{
+ const newUser = new User({
+   username:"test222",
+   email:"testEmail",
+   password:"testPassword"
+})
+newUser.save().then(console.log("userSaved"))
+})
 
 app.use("/logout", (req, res) => {
   console.log(req.body);

@@ -49,7 +49,7 @@ export default function SignUp() {
 */
 const addProduct = (data) => {
 
-  fetch('http://localhost:3000/api/auth/signup', {
+  fetch('http://localhost:3000/api/register', {
       method: 'POST',
       body: JSON.stringify({
         
