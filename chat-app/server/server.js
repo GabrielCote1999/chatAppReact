@@ -16,10 +16,9 @@ var socketio = require("socket.io");
 var http = require("http");
 const User = require("./database/user.model");
 const { Password } = require("@mui/icons-material");
-//Database object 
+//Database object
 //const db = require("./database");
-require('./routes/auth.routes')(app);
-
+require("./routes/auth.routes")(app);
 
 mongoose
   .connect(
@@ -31,14 +30,11 @@ mongoose
   )
   .then(() => {
     console.log("Successfully connect to MongoDB.");
-  
   })
   .catch((err) => {
     console.error("Connection error", err);
     process.exit();
   });
-
-  
 
 var port = normalizePort(process.env.PORT || "3000");
 app.set("port", port);
@@ -99,19 +95,18 @@ app.use("/login", (req, res) => {
   });
 });
 
-app.use("/api/register", (req, res) =>{
- const newUser = new User({
-   username:"test222",
-   email:"testEmail",
-   password:"testPassword"
-})
-newUser.save().then(console.log("userSaved"))
-})
+app.use("/api/register", (req, res) => {
+  const newUser = new User({
+    username: req.body.username,
+    email: req.body.email,
+    password: req.body.password,
+  });
+  newUser.save().then(console.log("userSaved"))
+});
 
 app.use("/logout", (req, res) => {
   console.log(req.body);
 });
-
 
 app.use("/sendToken", (req, res) => {
   tokens.push(req.body);

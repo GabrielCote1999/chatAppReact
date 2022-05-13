@@ -53,8 +53,8 @@ const addProduct = (data) => {
       method: 'POST',
       body: JSON.stringify({
         
-        username: data.get('email'),
-        email: data.get('name'),
+        username: data.get('firstName'),
+        email: data.get('email'),
         password: data.get('password')
       }),
       headers: {
